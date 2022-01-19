@@ -1,0 +1,103 @@
+This is design notes and to-dos for now
+
+CURRENT MAIN TASKS
+    - User Page
+        - Remember to come back and deal with downloading of avatar images (going to have to cache these locally)
+        - Why is the github URL getting populated when it doesn't exist?  (e.g., Ellen)
+    - Sheet Consumption
+    - Search
+        - Need to handle single character searches right (check for disallowed strings)
+    - TellusSource - Tellus' internal source to do its own setup functions
+        - Ensure there are some basic Tells for things like 'go' etc.
+    - Coverage - /tests/coverage/index.html
+
+
+2020-10-10:
+    In massive refactor, keeping some notes:
+        - Need to update existing Tells based on Categories in Migration
+        - Figure out last_updated bug (and maybe just put the info into the data dict) - think this was just the user issue
+
+DNS
+    - Check port 80 instead (in addition?) on load
+    - Only reload every once in a while
+    - Note last load, allow force?
+
+GO
+    -
+
+TELLUS general
+    NEXT
+        - Fix DNS so that it removes unreachable DNS entries after some period of time
+        - Consider whether to collapse Teller persistence into a parameter...
+        - Create something like data migrations...and save file versioning
+            - SAVE FILE VERSIONING
+                - Migrations from prev file to this one?
+
+        THINK ABOUT:  standard "value" items (e.g., alias) are easier to fill in templates
+            'look for tellus-alias' anywhere
+        Move other config into Vault
+            e.g., Github key
+            Create a configuration class
+    ISSUES
+        * Edit -> Delete is bad UI...add the delete/really? thing
+        * TELLUS SHOULD NOT OVERWRITE DATA, EVER (currently sources will do so)
+            x Source load should only be additive
+            ? Maybe always put source values in source map?
+            x Add source of "human" -> treats it as additive (Edit button?)
+                ? Collapse TELLUS_HUMAN -> TELLUS_GO?
+        - Fix queries/tellus category stuff (fully qualify categories)
+    - Sources
+        - Arbitrary adding of different types of sources
+            - Confluence
+            - Sheet (needs a bunch of config - to do sometime later)
+        - aiohttp multiple threads?  Asyncify some of the lookups?
+        - Prioritize updates of Tell data?  Right now it's basically last one wins...
+        - Add "purge/reload" for non-human touched items
+    Deployment
+        - Have Tellus' deployment link to its logs?
+    Tellicious
+        - what kind of a tell is this?
+            - no alias
+            -
+        - javascript
+        - rss -> Slack?
+    Feature Requests
+        tellus tiles a la Jumpcloud
+        CNAme -> A record mapping
+    Tells
+        - allow space delimited tags
+        - Make persistence safer (crazy git idea, or some other versioning something something)
+        - Look at creation persistence - I think happening outside of the Teller
+            Maybe did this because DNS...think about timing
+    Clean up the UI
+        ? Auto-gen Tellus display page attributes from dict
+        - Make prettier?  (use bootstrap theme?)
+        - figure out Bootstrap validation
+    Github Source
+        - Add all repos
+        - Give activity for the repo (sparkline of commits, people)
+        - Edges
+    Configuration
+        - Move all of the stuff out to real config files
+        - Need config file
+    Slackbot
+        - whatis (or just tellus?)
+        - whois
+    S/M
+        - History?
+
+
+- Validation
+
+Features I'd like to add:
+    - Magic tags (e.g., "Dashboard")
+
+Replicate for Go:
+javascript:q=location.href;if(document.getSelection){d=document.getSelection();}else{d='';};p=document.title;void(open('https://pinboard.in/add?url='+encodeURIComponent(q)+'&description='+encodeURIComponent(d)+'&title='+encodeURIComponent(p),'Pinboard','toolbar=no,width=700,height=350'));
+javascript:q=location.href;if(document.getSelection){d=document.getSelection();}else{d='';};p=document.title;void(open('https://pinboard.in/add?url='+encodeURIComponent(q)+'&description='+encodeURIComponent(d)+'&title='+encodeURIComponent(p),'Pinboard','toolbar=no,width=700,height=350'));
+
+OLD NOTES
+---------
+    # This is now handled a little more simply, but useful reminder...
+    # Setting a debug email in the browser looks like this:
+    # tellususer = "{\"created\": 1602255557\054 \"session\": {\"tellus_debug_email\": \"user@someserver.com\"\054 \"tellususer\": \"user\"}}"

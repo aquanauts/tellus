@@ -1,0 +1,4 @@
+[MASTER]
+
+# Only include warnings and errors
+disable=C,R

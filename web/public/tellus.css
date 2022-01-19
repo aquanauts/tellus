@@ -1,0 +1,129 @@
+:root {
+    --aq-yellow: rgb(253, 183, 22);
+    --aq-orange: rgb(234, 108, 39);
+    --aq-dark-blue: rgb(21, 65, 81);
+    --aq-med-blue: rgb(46, 121, 122);
+    --aq-light-blue: rgb(74, 179, 184);
+    --aq-lighter-blue: rgb(230, 245, 245);
+    --tellus-purple: mediumpurple;
+}
+
+
+.tell-property {
+    font-weight: bold;
+    text-wrap: none;
+}
+
+.tellus-version {
+    text-wrap: none;
+    color: var(--tellus-purple);
+}
+
+.tellus-tag {
+    text-wrap: none;
+}
+
+.tellus-category {
+    text-wrap: none;
+}
+
+.tellus-link-header {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.tellus-link-error {
+    color: var(--aq-orange);
+    text-decoration: inherit;
+}
+
+
+a.unstyled-link { /* deprecated? */
+    color: inherit;
+    text-decoration: inherit;
+}
+
+/* Tellus Tag and Category Badges */
+.badge-tag {
+    background-color: var(--aq-lighter-blue);
+    /*color: #fff;*/
+}
+
+a.badge-tag:focus,
+a.badge-tag:hover {
+    color: #fff;
+    background-color: #59339d
+}
+
+a.badge-tag.focus,
+a.badge-tag:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(111, 66, 193, .5)
+}
+
+.badge-category {
+    background-color: #eeeeee;
+    color: var(--tellus-purple);
+}
+
+a.badge-category:focus,
+a.badge-category:hover {
+    /*color: #212529;*/
+    /*background-color: #dae0e5;*/
+    color: #eeeeee;
+    background-color: var(--tellus-purple);
+}
+
+a.badge-category.focus,
+a.badge-category:focus {
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(248, 249, 250, .5)
+}
+
+.badge-tell-count {
+    color: var(--aq-med-blue);
+    background-color: inherit;
+    filter: brightness(130%);
+}
+
+
+img.nav-icon {
+    width: 20px;
+    height: 20px;
+}
+
+img.small-icon {
+    width: 25px;
+    height: 25px;
+    vertical-align: top;
+}
+
+.initially-hide {
+    display: none;
+}
+
+.tellus-link-item-extended {
+}
+
+.tlie-info {
+    width: 100%;
+    /*white-space: nowrap;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.tlie-description {
+    display: inline-block;
+    width: 50%;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    color: gray;
+    font-size: small;
+    font-style: italic;
+}

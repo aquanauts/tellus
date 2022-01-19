@@ -1,0 +1,37 @@
+---
+name: tellus
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - ipython
+  - pylint
+  - humanfriendly
+  - aiohttp
+  - aiohttp-session
+  - aiohttp-security
+  - trafaret
+  - pytest-mock
+  - pytest-aiohttp
+  - pyfakefs
+  - sortedcontainers
+  - pygithub
+  - pyyaml
+  - requests-mock
+  - jsonpickle
+  - pip
+  - oauth2client
+  - gspread
+  - google-api-python-client
+  - asynctest
+  - python-dateutil
+  - black
+  - atlassian-python-api
+  - pytest-watch
+  - python-dotenv
+  - pytest-asyncio
+  - pandas
+  - fuzzywuzzy
+  - coverage

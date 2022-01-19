@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<html lang="en">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+<link href="/tellusstaticfiles/base.css" rel="stylesheet">
+<link href="/tellusstaticfiles/tellus.css" rel="stylesheet">
+<script type="text/javascript" src='/tellusstaticfiles/vendor/jquery-2.2.4/jquery-2.2.4.min.js'></script>
+<script type="text/javascript" src='/tellusstaticfiles/vendor/bootstrap-4.3.1/bootstrap.min.js'></script>
+<link rel="stylesheet" type="text/css" href="./tellusstaticfiles/vendor/bootstrap-4.3.1/bootstrap.css">
+<link rel="icon" type="image/png" href="/tellusstaticfiles/img/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<script type="text/javascript" src='/tellusstaticfiles/vendor/moment-2.2.4/moment.js'></script>
+<script type="text/javascript" src='/tellusstaticfiles/js/events.js'></script>
+<script type="text/javascript" src='/tellusstaticfiles/js/templates.js'></script>
+<script type="text/javascript" src='/tellusstaticfiles/js/router.js'></script>
+
+<script type="text/javascript" src='/tellusstaticfiles/vendor/selectize.js-0.12.4/dist/js/standalone/selectize.js'></script>
+<link rel="stylesheet" type="text/css" href="/tellusstaticfiles/vendor/selectize.js-0.12.4/dist/css/selectize.css" />
+</html>
+
+<body>
+<div class="markup">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <span class='banner'>
+        <a href="#home" class='navbar-brand'>
+          <img class='logo' src="/tellusstaticfiles/img/icon.svg" alt="Tellus">
+          <span class="title">
+            Tellus
+          </span>
+        </a>
+      </span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#go" title="Go Links - click here to create a new one">Go</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#who" title="Directory of all Users">Who</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link social-link" href="#social" title="I am CoffeeBot!">
+                        <img class="tellus-coffee-bot-on small-icon initially-hide" src="/tellusstaticfiles/img/toggles/coffee-bot-on.png"/>
+                        <img class="tellus-coffee-bot-off small-icon" src="/tellusstaticfiles/img/toggles/coffee-bot-off.png"/>
+                    </a>
+                </li>
+<!-- Disabling Discussions for now-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#discussions">Discussions</a>-->
+<!--                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link" href="#tools">Tools</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#dns">DNS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tells">All Tells</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#sources">Sources</a>
+                </li>
+            </ul>
+<!-- Not ready yet... -->
+<!--            <div class="navbar-search pr-2">-->
+<!--                <form class="form-inline my-2 my-lg-0">-->
+<!--                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--&lt;!&ndash;                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&ndash;&gt;-->
+<!--                </form>-->
+<!--            </div>-->
+            <div class="navbar-username pr-2"></div>
+        </div>
+    </nav>
+
+    <div class="tellus-main-view container-fluid">
+        <div class="tellus-message justify-content-center container-fluid"></div>
+        <div class="view-container container-fluid"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="tellus-page-footer text-center py-3 font-italic small">
+        <a class="nav-link" href="#t.tellus"><img src="/tellusstaticfiles/img/favicon.png" width="15" height="15"> <span class="tellus-version"></span></a>
+    </footer>
+    <!-- Footer -->
+
+
+    <div class="templates">
+        <div class="homeView">
+<!--            <div class="tellus-message justify-content-center"></div>-->
+            <div class="row">
+                <div class="left-home-col col-sm-3"></div>
+                <div class="center-home-col col-sm-6"></div>
+                <div class="right-home-col col-sm-3"></div>
+            </div>
+        </div>
+
+        <div class="goView"></div>
+        <!-- Go form to add a new link -->
+        <div class="goFormComponent border p-3 my-2">
+            <form class="needs-validation" novalidate method="post" id="go-form">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col col-sm-2">
+                            <input type="text" class="form-control alias" name="alias" placeholder="Alias">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control go_url" name="go_url" placeholder="URL">
+                        </div>
+                        <div class="col col-sm-2">
+                            <input type="text" class="form-control tags" name="tags" placeholder="Tags">
+                        </div>
+                        <button type="submit" class="btn btn-primary go-submit" title="Add Go link">+</button>
+                        <div class="valid-feedback go-response"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- TELLS -->
+        <!-- A view of an individual Tell, ultimately to be editable.  This is the main display HTML for Tells -->
+        <div class="tellusTellPageView container-fluid row">
+            <div class="tellusTellView col-sm-8 p-3 my-2">
+            </div>
+            <div class="tellusRelatedTells col-sm-2 p-3 my-2">
+            </div>
+        </div>
+        <div class="tellusTellReadOnlyView border">
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <td class="tell-property w-25" scope="row">Alias</td>
+                    <td class="tell-alias"></td>
+                </tr>
+                <tr>
+                    <td class="tell-property w-25" scope="row">URL</td>
+                    <td><a class="tell-url"></a></td>
+                </tr>
+                <tr>
+                    <td class="tell-property w-25" scope="row">Description</td>
+                    <td class="tell-description"></td>
+                </tr>
+                <tr>
+                    <td class="tell-property w-25" scope="row">Tags</td>
+                    <td class="tell-tags"></td>
+                </tr>
+                <tr>
+                    <td class="tell-property w-25" scope="row">Categories</td>
+                    <td class="tell-categories"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="tell-editable d-flex m-1 small font-italic">
+                <button class="btn btn-secondary mr-auto"  id="tell-edit" value="tell-edit">Edit Tell</button>
+            </div>
+        </div>
+        <div class="tellusTellEditableView">
+            <div class="border">
+                <form class="needs-validation" novalidate method="post" id="tell-update-form">
+                <div class="d-flex">
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <td class="tell-property w-25" scope="row">Alias</td>
+                            <td class="tell-updated-alias">
+                                <input type="text" class="form-control new_alias" name="new_alias" placeholder="Alias">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tell-property w-25" scope="row">URL</td>
+                            <td class="tell-url">
+                                <input type="text" class="form-control go_url" name="go_url" placeholder="URL">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tell-property w-25" scope="row">Description</td>
+                            <td class="tell-description">
+                                <input type="text" class="form-control description" name="description">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tell-property w-25" scope="row">Tags</td>
+                            <td class="tell-tags">
+                                <input type="text" class="tags" name="tags">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tell-property w-25" scope="row">Categories</td>
+                            <td class="tell-categories"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                    <div class="d-flex p-1 updateable-tell">
+                        <button class="btn btn-primary" value="tell-update-submit">Update Tell</button>
+                        <button class="btn btn-light ml-2" value="tell-update-cancel">Cancel</button>
+                        <button class="btn btn-danger ml-auto" value="tell-delete">Delete Tell</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--  Specific Tell Lists   -->
+        <div class="tellsView"><div class="tellus-categories"></div> </div>
+        <div class="dnsView">
+            <div class="row">
+                <div class="left-dns-col col-sm-5"></div>
+                <div class="right-dns-col col-sm-5"></div>
+            </div>
+        </div>
+        <div class="toolsView"></div>
+
+        <div class="searchView"></div>
+
+        <!-- END TELLS -->
+
+
+        <!-- USERS -->
+        <!-- A view of a User.  This is the main display HTML for Tells -->
+        <div class="tellusUserPageView container-fluid row">
+            <div class="container-fluid row">
+                <div class="tellusUserLeftColumn col-sm-3"></div>
+                <div class="tellusUserMiddleColumn col-md"></div>
+                <div class="tellusUserRightColumn col-sm-3"></div>
+            </div>
+        </div>
+
+<!-- TODO: extract -->
+        <div class="tellusUserCard container">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                    <img src="/tellusstaticfiles/img/user.png" id="userCardAvatar" alt="Logo" class="userCardAvatar rounded-circle" width="150">
+                    <div class="mt-3">
+                      <div class="userCardFullName h5">User Name</div>
+                      <div class="userCardPhone text-secondary">Phone</div>
+                        <a class="userCardEmail text-secondary">Email</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="tellusUserLinks card mt-3 container">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <h6 class="mb-0">
+                    Profile</h6>
+                <a class="userCardHomepage text-secondary">Confluence</a>
+              </li>
+              <li class="userCardGithubLI list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                <h6 class="mb-0">
+                    <img src="/tellusstaticfiles/img/logos/github-aq.png" width="24" class="rounded-circle mr-2 icon-inline">
+                    Github</h6>
+                <a class="userCardGithub text-secondary">AQ Github</a>
+              </li>
+            </ul>
+        </div>
+
+        <div class="coffeeBotCard container card card-body d-flex flex-column align-items-left text-center mt-3">
+            <div class="coffeePair">Coffee Pair:  </div>
+            <div class="coffeeHistory small flex-wrap"></div>
+        </div>
+
+
+        <!-- Lists of Users in various forms -->
+        <div class="usersView socialView">
+            <div class=" mb-2">
+               <span class="tellus-coffee-bot initially-hide">
+                   <button type="button" class="btn btn-outline-primary tellus-coffee-bot-on initially-hide" title="Click to turn off.">
+                        <img class="small-icon" src="/tellusstaticfiles/img/toggles/coffee-bot-on.png"/>
+                        Your Coffee Bot is On
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary tellus-coffee-bot-off initially-hide" title="Click to turn on.">
+                        <img class="small-icon" src="/tellusstaticfiles/img/toggles/coffee-bot-off.png"/>
+                        Your Coffee Bot is Off
+                    </button>
+               </span>
+            </div>
+        </div>
+        <div class="user-list container-fluid">
+            <div class="row d-flex">
+                <div class="card-header col-sm-2 flex-nowrap">
+                    <img src="/tellusstaticfiles/img/user.png" alt="Who" title="Users" class="small-icon"/>
+                    <span    class="user-name-header">Users</span>
+                </div>
+                <div class="user-additional-info-header card-header col-md"></div>
+            </div>
+        </div>
+        <div class="user-list-user row d-flex border-bottom">
+            <div class="user-name col-sm-2"></div>
+            <div class="user-additional-info col-md"></div>
+        </div>
+
+        <div class = "usersMultiColumnView">
+            <div class="user-count-header card-header col-sm-2 flex-nowrap">
+                <img src="/tellusstaticfiles/img/user.png" alt="Who" title="Users" class="small-icon"/>
+                <span class="user-name-header">Users</span>
+            </div>
+        </div>
+        <div class = "socialMultiColumnView"></div>
+
+        <div class="sourcesView">
+            <div class="sourcesList">
+            </div>
+            <button class="load-all-sources btn btn-primary ml-auto float-right p-1 m-2" value="">Load All</button>
+        </div>
+
+        <div class="discussionsView"></div>
+
+        <!-- A an individual source. -->
+        <div class="source-item list-group-item d-flex justify-content-between align-items-center p-1">
+            <div>
+                <div>
+                    <span class="source-display-name font-weight-bold"></span>:
+                    <span class="source-description">SOURCE DESCRIPTION</span>
+                </div>
+                <div class="tellus-source-info footer small font-italic"></div>
+            </div>
+            <button class="load-source btn btn-primary ml-auto" value="">Load</button>
+        </div>
+
+        <!-- VIEW COMPONENTS  -->
+
+        <!-- A common multi-column-table throughout Tellus-->
+        <div class="multi-column-table-section h2"></div>
+        <div class="multi-column-table-row row d-flex border-bottom"></div>
+        <div class="multi-column-table-primary-col-header col-md-4 lead"></div>
+        <div class="multi-column-table-other-col-header col-md lead"></div>
+        <div class="multi-column-table-primary-col-row col-md-4"></div>
+        <div class="multi-column-table-other-col-row col-md"></div>
+
+        <!--  User Information -->
+        <div class="tellus-current-user flex-nowrap"></div>
+        <a class="tellus-user-page-link"></a>
+        <div class="tellus-coffee-pair flex-nowrap"></div>
+
+
+        <!-- A commonly used list of links throughout Tellus -->
+        <div class="tellusLinksComponent list-group tellus-link-group">
+            <a href="" class="tellus-link-header list-group-item list-group-item-action active d-flex justify-content-between align-items-center">
+                <span class="tellus-link-header-text">REPLACE ME WITH HEADER TEXT</span>
+                <span class="tell-count badge badge-tell-count badge-pill">?</span>
+            </a>
+        </div>
+
+        <!--NOTE:  These next two are variants of the same thing.  Be careful to keep them the same as needed.-->
+        <div class="tellus-link-item list-group-item d-flex justify-content-between align-items-center">
+            <a class="tellus-link"></a>
+            <a class="tellus-edit" title="View/Edit Tell">...</a>
+        </div>
+        <div class="tellus-link-item-extended list-group-item">
+            <div class="row">
+                <div class="col-sm tlie-link flex-nowrap">
+                    <div>
+                    <a class="tellus-link"></a>
+                    <a class="tellus-edit" title="View/Edit Tell">+</a>
+                        </div>
+                    <div class="tlie-description align-bottom pt-2"></div>
+                </div>
+                <div class="col-sm tlie-info flex-nowrap">
+                    <span class="tlie-tags float-right"></span>
+               </div>
+            </div>
+        </div>
+
+
+        <div class="tellus-go-link tellus-data-header list-group-item font-weight-bold d-flex justify-content-between align-items-center">
+            <a class="tellus-go-href"></a>
+        </div>
+
+        <!-- A block of arbitrary Data that can be added throughout Tellus -->
+        <div class="tellusDataBlock my-3">
+            <ul class="list-group">
+                <li class="tellus-data-header list-group-item active">REPLACE ME WITH HEADER TEXT</li>
+            </ul>
+            <table class="tellus-data-table table table-bordered">
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <table class="tellus-fake-table-for-grabbing-rows">
+            <tr class="tellus-data-item">
+                <td class="tellus-data-key tell-property w-25" scope="row"></td>
+                <td class="tellus-data-value"></td>
+            </tr>
+        </table>
+
+        <!-- Assorted Individual display items that get placed around Tellus-->
+        <div class="tellus-danger alert alert-danger justify-content-center row"></div>
+        <div class="tellus-info alert alert-info justify-content-center row"></div>
+
+        <a class="tellus-tag m-1 p-1 badge badge-tag badge-pill"></a>
+        <a class="tellus-category m-1 p-1 badge badge-category badge-pill"></a>
+
+        <a class="tellus-generic-url" href=""></a>
+        <a class="tellus-generic-email" href=""></a>
+
+        <div class="tellus-audit-info footer small font-italic"></div>
+        <div class="tellus-tiny-note footer small font-italic"></div>
+
+        <!-- a place to view the root components and a few other things for debugging - not to be used for anything real -->
+        <div class="debugView">
+        </div>
+
+    </div> <!-- templates -->
+</div>
+
+<script type="module">
+    import {routes} from './tellusstaticfiles/js/app.js';
+    import {setupCommonUI, displayCurrentUser, setupSocialElements} from './tellusstaticfiles/js/common.js';
+
+    window.appRoutes = routes();
+    $(window).ready(() => {
+        routerOnReady(window.appRoutes);
+    });
+
+    // window.setupCommonUI = setupCommonUI();
+    $(window).ready(() => {setupCommonUI();});
+    $(window).ready(() => {displayCurrentUser();}); // tellus-task: @godbolt - this didn't work: (async () => {await displayCurrentUser();});
+    $(window).ready(() => {setupSocialElements();});
+</script>
+</body>

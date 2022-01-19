@@ -1,0 +1,18 @@
+# Tellus' tool file
+# Note that the Tellus yml file has some special tells for configuring Tellus itself
+alias: tellus
+description:  Tellus is our central portal/hub, living at github.com/aquanauts/tellus - you are, probably, here.
+go_url: https://github.com/users
+tags:  tellus, tools
+colors: yellow and purple
+about: https://github.com/users/tellusstaticfiles/tellus.html
+builds: https://build.github.com/users/#/builders?tags=%2Btellus
+deploy:  https://deploy.github.com/users/ui/jobs/tellus
+# tools:  all
+---
+alias: tellus-config-tools
+description:  A configuration Tell for Tellus - configures certain "magic word" URLs for the tellus.yml files.
+tags: tellus, tools, tellus-config
+builds: https://build.github.com/users/#/builders/<ID>
+deploy: https://deploy.github.com/users/ui/jobs/<alias>
+github-repo: https://github.com/users/<org>/<alias>

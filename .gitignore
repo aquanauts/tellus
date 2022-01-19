@@ -1,0 +1,6 @@
+.venv/
+__pycache__
+.DS_STORE
+scratch
+design/local-only
+.env
